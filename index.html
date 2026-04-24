@@ -159,7 +159,7 @@
             width: 100%;
         }
 
-        /* Media Card */
+        /* General Card */
         .project-card {
             background: rgba(0,0,0,0.4); border-radius: 16px; overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative;
@@ -167,7 +167,7 @@
         }
         .project-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        /* Stop Masonry items from cutting in half */
+        /* Specific rule for Masonry items to prevent splitting in half */
         .masonry-grid .project-card {
             display: inline-block;
             break-inside: avoid;
@@ -186,7 +186,6 @@
             position: absolute; top: 0; left: 0;
         }
         
-        /* Images show true height natively */
         .video-wrapper img { width: 100%; height: auto; display: block; }
         
         .hover-overlay {
@@ -371,27 +370,7 @@
                 });
         });
 
-        // Optimize column logic for resizing window
-        window.addEventListener('resize', () => {
-            const stickyNav = document.getElementById('sticky-nav');
-            const scrollTopBtn = document.getElementById('scroll-top-btn');
-            const header = document.querySelector('header');
-            
-            if (window.scrollY > header.offsetHeight + 50) {
-                stickyNav.classList.add('show');
-                scrollTopBtn.classList.add('show');
-            } else {
-                stickyNav.classList.remove('show');
-                scrollTopBtn.classList.remove('show');
-            }
-
-            // Force recalculate masonry columns based on filter
-            const activeFilter = document.querySelector('#photo-filters .filter-btn.active');
-            if (activeFilter) {
-                fixMasonryColumns();
-            }
-        });
-
+        // Sticky Nav & Scroll to top
         window.addEventListener('scroll', () => {
             const stickyNav = document.getElementById('sticky-nav');
             const scrollTopBtn = document.getElementById('scroll-top-btn');
@@ -521,25 +500,6 @@
             });
         }
 
-        // Logic to ensure 1 or 2 items don't awkwardly stack to the left
-        function fixMasonryColumns() {
-            const photoGrid = document.querySelector('#pictures .masonry-grid');
-            if (photoGrid) {
-                let visibleCount = document.querySelectorAll('.project-card.photo-post[style*="display: inline-block"]').length;
-                if (visibleCount === 0) visibleCount = document.querySelectorAll('.project-card.photo-post').length; // Fallback if styles not set
-
-                if (window.innerWidth <= 650) {
-                    photoGrid.style.columnCount = "1";
-                } else if (window.innerWidth <= 1000) {
-                    photoGrid.style.columnCount = visibleCount === 1 ? "1" : "2";
-                } else {
-                    if (visibleCount === 1) photoGrid.style.columnCount = "1";
-                    else if (visibleCount === 2) photoGrid.style.columnCount = "2";
-                    else photoGrid.style.columnCount = ""; // Fallback to CSS rules
-                }
-            }
-        }
-
         function filterPhotos(category, btnElement) {
             const buttons = document.querySelectorAll('#photo-filters .filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -548,13 +508,12 @@
             const photos = document.querySelectorAll('.project-card.photo-post');
             photos.forEach(photo => {
                 if (category === 'all' || photo.getAttribute('data-tag') === category) {
-                    photo.style.display = 'inline-block'; // Block allows break-inside to work properly
+                    // Changing from generic 'block' to 'inline-block' ensuring Masonry handles it correctly
+                    photo.style.display = 'inline-block'; 
                 } else {
                     photo.style.display = 'none';
                 }
             });
-
-            fixMasonryColumns();
         }
 
         function hoverPlay(card) {
