@@ -1,0 +1,358 @@
+{
+    "meta": {
+        "pageTitle": "Azy | Editor Portfolio",
+        "favicon": "Pictures/Azy Logo.png",
+        "logoImage": "Pictures/Azy Logo.png"
+    },
+    "header": {
+        "title": "Azy Creates",
+        "tagline": "Storytelling across formats."
+    },
+    "footer": {
+        "text": "Let's work together",
+        "links": {
+            "facebook": "https://www.facebook.com/profile.php?id=61578452950822",
+            "whatsapp": "https://wa.me/639515983233",
+            "email": "azycreates@gmail.com",
+            "resumeImg": "Pictures/resume.png",
+            "resumePdf": "Dhasy Villanueva.pdf"
+        }
+    },
+    "categories": [
+        {
+            "id": "vlogs",
+            "name": "Vlogs / Long Form",
+            "videos": [
+                {
+                    "title": "Team Building in Mexico",
+                    "subtitle": "Travel • Landscape",
+                    "youtubeId": "dq9nsDT1PQA",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Morning Off",
+                    "subtitle": "Travel • Experience",
+                    "youtubeId": "SW8F1rAJ3eQ",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Mazatlan",
+                    "subtitle": "Travel",
+                    "youtubeId": "fhZUHtpObgk",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Unang Sampa",
+                    "subtitle": "Life",
+                    "youtubeId": "fYqazvr1z6k",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Nature Vlog",
+                    "subtitle": "Nature • Scenery",
+                    "youtubeId": "7nSmvJHJVv4",
+                    "format": "landscape"
+                }
+            ]
+        },
+        {
+            "id": "films",
+            "name": "Films / Documentary",
+            "videos": [
+                {
+                    "title": "Wikang Filipino",
+                    "subtitle": "Cinematic • Storytelling",
+                    "youtubeId": "E8ih2f9wKyw",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Pahinga | MV",
+                    "subtitle": "Cinematic • Storytelling • Love",
+                    "youtubeId": "02Q1UoHWoco",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Dalubhasa",
+                    "subtitle": "Cinematic • Storytelling",
+                    "youtubeId": "4SBTh32Iyj4",
+                    "format": "landscape"
+                }
+            ]
+        },
+        {
+            "id": "shortform",
+            "name": "Short Form",
+            "videos": [
+                {
+                    "title": "Informational",
+                    "subtitle": "Vertical • Health",
+                    "youtubeId": "UGwTBECD4tM",
+                    "format": "vertical"
+                },
+                {
+                    "title": "IDRN - LNHS",
+                    "subtitle": "Highlights",
+                    "youtubeId": "u-IORsB1Ox4",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Siyensikula",
+                    "subtitle": "Visual Effects • Science",
+                    "youtubeId": "XjlKXibZspg",
+                    "format": "landscape"
+                }
+            ]
+        },
+        {
+            "id": "pictures",
+            "name": "Pictures",
+            "items": [
+                {
+                    "title": "Worship Stage",
+                    "subtitle": "Event Setup",
+                    "imageUrl": "Pictures/images/Events/Colored (1 of 1).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Team Group Photo",
+                    "subtitle": "Memories",
+                    "imageUrl": "Pictures/images/Events/Colored (6 of 56).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Youth Night",
+                    "subtitle": "Event Coverage",
+                    "imageUrl": "Pictures/images/Events/Colored (10 of 56).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "IDRN Training",
+                    "subtitle": "Action",
+                    "imageUrl": "Pictures/images/Events/Colored (17 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Prayer",
+                    "subtitle": "Students",
+                    "imageUrl": "Pictures/images/Events/Colored (25 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Parade",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (27 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Parade",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (31 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Medical Training",
+                    "subtitle": "IDRN Activity",
+                    "imageUrl": "Pictures/images/Events/Colored (40 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Parade",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (46 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Demonstration",
+                    "subtitle": "First Aid",
+                    "imageUrl": "Pictures/images/Events/Colored (47 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Raising Flags",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (53 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Drill",
+                    "subtitle": "IDRN Training",
+                    "imageUrl": "Pictures/images/Events/Colored (58 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Waving Banners",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (59 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Marching Flags",
+                    "subtitle": "Event Highlights",
+                    "imageUrl": "Pictures/images/Events/Colored (60 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Participants",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (64 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Smiles",
+                    "subtitle": "Candid",
+                    "imageUrl": "Pictures/images/Events/Colored (67 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Arena Gathering",
+                    "subtitle": "Jesus Reigns",
+                    "imageUrl": "Pictures/images/Events/Colored (68 of 71).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Assembly",
+                    "subtitle": "Limay High School",
+                    "imageUrl": "Pictures/images/Events/Colored (69 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Cover",
+                    "subtitle": "Drill Simulation",
+                    "imageUrl": "Pictures/images/Events/Colored (72 of 75).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Church Group Photo",
+                    "subtitle": "Group Photo",
+                    "imageUrl": "Pictures/images/Events/Colored (87 of 114).jpg",
+                    "format": "photo-card",
+                    "tag": "events"
+                },
+                {
+                    "title": "Skyscape",
+                    "subtitle": "Nature",
+                    "imageUrl": "Pictures/images/Lansdcape/Colored (5 of 107).jpg",
+                    "format": "photo-card",
+                    "tag": "landscapes"
+                },
+                {
+                    "title": "Dog",
+                    "subtitle": "Scenery",
+                    "imageUrl": "Pictures/images/Lansdcape/P1070057.jpg",
+                    "format": "photo-card",
+                    "tag": "landscapes"
+                },
+                {
+                    "title": "Worship",
+                    "subtitle": "Moments",
+                    "imageUrl": "Pictures/images/Portraits/Colored (15 of 56).jpg",
+                    "format": "photo-card",
+                    "tag": "portraits"
+                },
+                {
+                    "title": "Emotion",
+                    "subtitle": "Portraits",
+                    "imageUrl": "Pictures/images/Portraits/Colored (17 of 56).jpg",
+                    "format": "photo-card",
+                    "tag": "portraits"
+                },
+                {
+                    "title": "Cheesy Fries",
+                    "subtitle": "Snacks",
+                    "imageUrl": "Pictures/images/Foods/cheesy fries.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Chicken Poppers",
+                    "subtitle": "Snacks",
+                    "imageUrl": "Pictures/images/Foods/chicken poppers snacks.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Chicken Wings",
+                    "subtitle": "Meals",
+                    "imageUrl": "Pictures/images/Foods/chicken wings.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Nachos",
+                    "subtitle": "Snacks",
+                    "imageUrl": "Pictures/images/Foods/nachos.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Spanish Latte",
+                    "subtitle": "Beverage",
+                    "imageUrl": "Pictures/images/Foods/spanishlatte.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Iced Mocha",
+                    "subtitle": "Beverage",
+                    "imageUrl": "Pictures/images/Foods/iced mocha.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Strawberry Milkshake",
+                    "subtitle": "Beverage",
+                    "imageUrl": "Pictures/images/Foods/strawberry milkshake.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Ube Cloud",
+                    "subtitle": "Beverage",
+                    "imageUrl": "Pictures/images/Foods/ubecloud.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Oreo",
+                    "subtitle": "Dessert",
+                    "imageUrl": "Pictures/images/Foods/oREO (1).png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Biscoff",
+                    "subtitle": "Dessert",
+                    "imageUrl": "Pictures/images/Foods/biscoff (1).png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Food Set",
+                    "subtitle": "Meals",
+                    "imageUrl": "Pictures/images/Foods/SET.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                }
+            ]
+        }
+    ]
+}
