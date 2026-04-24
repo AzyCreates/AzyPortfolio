@@ -154,7 +154,7 @@
 
         /* 2. Photo Grid (Pinterest-style Masonry to remove empty gaps) */
         .masonry-grid {
-            column-count: 3;
+            column-count: 3; /* JS adjusts this down to 2 or 1 if there aren't enough photos */
             column-gap: 25px;
             width: 100%;
         }
@@ -283,12 +283,9 @@
         }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        @media (max-width: 1000px) { 
-            .masonry-grid { column-count: 2; } 
-        }
         @media (max-width: 650px) { 
             .video-grid { grid-template-columns: 1fr; }
-            .masonry-grid { column-count: 1; }
+            /* Mobile handles columns automatically now via JS */
             .glass-panel { padding: 25px; border-radius: 0; border: none; }
             h1 { font-size: 2.2rem; }
             .modal-content { width: 95%; }
@@ -362,6 +359,9 @@
                         main.style.opacity = '1';
                         main.style.transform = 'scale(1)';
                         document.body.style.overflowY = 'auto';
+                        
+                        // Force columns calculation once layout is visible
+                        updateMasonryColumns();
                     }, 1600);
                 })
                 .catch(err => {
@@ -370,7 +370,6 @@
                 });
         });
 
-        // Sticky Nav & Scroll to top
         window.addEventListener('scroll', () => {
             const stickyNav = document.getElementById('sticky-nav');
             const scrollTopBtn = document.getElementById('scroll-top-btn');
@@ -383,6 +382,11 @@
                 stickyNav.classList.remove('show');
                 scrollTopBtn.classList.remove('show');
             }
+        });
+
+        // Trigger column update on resize
+        window.addEventListener('resize', () => {
+            updateMasonryColumns();
         });
 
         function scrollToTop() {
@@ -455,7 +459,7 @@
                     `;
                 }
 
-                // Videos get normal grid, Pictures get masonry grid
+                // Videos get standard grid, Pictures get masonry
                 let gridClass = cat.id === 'pictures' ? 'masonry-grid' : 'video-grid';
                 let gridHtml = `<div class="${gridClass}">`;
                 
@@ -500,20 +504,46 @@
             });
         }
 
+        // --- SMART COLUMN ALGORITHM ---
+        // Dynamically adjusts column-count so 1 or 2 photos stay side-by-side!
+        function updateMasonryColumns() {
+            const masonryGrid = document.querySelector('.masonry-grid');
+            if (masonryGrid) {
+                // Count how many photos are currently visible
+                let visibleCount = 0;
+                document.querySelectorAll('.project-card.photo-post').forEach(photo => {
+                    if (photo.style.display !== 'none') {
+                        visibleCount++;
+                    }
+                });
+
+                // Determine maximum columns allowed based on screen width
+                let maxCols = window.innerWidth > 1000 ? 3 : (window.innerWidth > 650 ? 2 : 1);
+                
+                // If we have fewer photos than columns, shrink the column count to match the photos!
+                let appliedCols = (visibleCount > 0 && visibleCount < maxCols) ? visibleCount : maxCols;
+                
+                masonryGrid.style.columnCount = appliedCols;
+            }
+        }
+
         function filterPhotos(category, btnElement) {
             const buttons = document.querySelectorAll('#photo-filters .filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
 
             const photos = document.querySelectorAll('.project-card.photo-post');
+            
             photos.forEach(photo => {
                 if (category === 'all' || photo.getAttribute('data-tag') === category) {
-                    // Changing from generic 'block' to 'inline-block' ensuring Masonry handles it correctly
                     photo.style.display = 'inline-block'; 
                 } else {
                     photo.style.display = 'none';
                 }
             });
+
+            // Re-calculate the columns immediately after filtering
+            updateMasonryColumns();
         }
 
         function hoverPlay(card) {
