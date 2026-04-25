@@ -41,7 +41,7 @@
             overflow-y: hidden; 
         }
 
-        /* --- 2. TRUE LOADING SCREEN --- */
+        /* --- 2. LOADING SCREEN --- */
         #intro-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999;
@@ -85,6 +85,7 @@
             width: 45px; height: 45px; border-radius: 50%;
             background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;
             transition: 0.3s ease; cursor: pointer; text-decoration: none;
+            position: relative; z-index: 10;
         }
         .social-btn svg { width: 20px; height: 20px; fill: #fff; }
         .social-btn.fb:hover { background: var(--fb-color); transform: translateY(-3px); }
@@ -92,7 +93,7 @@
         .social-btn.mail:hover { background: var(--mail-color); transform: translateY(-3px); }
         .social-btn.resume:hover { background: var(--resume-color); transform: translateY(-3px); }
 
-        .category-nav { display: flex; justify-content: center; gap: 15px; margin-top: 10px; flex-wrap: wrap; }
+        .category-nav { display: flex; justify-content: center; gap: 15px; margin-top: 10px; flex-wrap: wrap; position: relative; z-index: 10; }
         .nav-pill {
             padding: 10px 25px; border-radius: 50px; background: rgba(255,255,255,0.05); color: #fff; 
             text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid transparent; transition: 0.3s;
@@ -111,7 +112,7 @@
             font-size: 0.95rem; font-style: italic;
         }
 
-        .filter-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .filter-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; position: relative; z-index: 10; }
         .filter-btn {
             background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--glass-border);
             padding: 8px 20px; border-radius: 50px; cursor: pointer; transition: 0.3s ease; font-size: 0.9rem;
@@ -119,18 +120,32 @@
         }
         .filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); }
 
-        /* GRID LAYOUTS */
+
+        /* --- STRICT LAYOUTS --- */
+        
+        /* 1. Strict Video Grid (Uses auto-fill to NEVER stretch horizontally, and start to NEVER stretch vertically) */
         .video-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px; align-items: start; 
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            align-items: start; 
         }
 
-        .masonry-container { display: flex; gap: 25px; align-items: flex-start; width: 100%; }
-        .masonry-column { flex: 1; display: flex; flex-direction: column; gap: 25px; }
+        /* 2. Photo Masonry Wrapper */
+        .masonry-wrapper {
+            display: flex; gap: 25px; align-items: flex-start; width: 100%; justify-content: flex-start;
+        }
+        .masonry-col {
+            display: flex; flex-direction: column; gap: 25px;
+        }
+        .masonry-col .project-card {
+            width: 100%;
+        }
 
+        /* General Card Appearance */
         .project-card {
             background: rgba(0,0,0,0.4); border-radius: 16px; overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative; width: 100%;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative;
         }
         .project-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
@@ -157,16 +172,15 @@
         .info h3 { font-size: 1.1rem; margin-bottom: 5px; color: #eee; font-weight: 600; }
         .info p { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; }
 
-        footer { margin-top: 50px; text-align: center; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+        footer { margin-top: 50px; text-align: center; padding-top: 40px; border-top: 1px solid var(--glass-border); position: relative; z-index: 10; }
 
-        /* --- 5. UNIFIED POPUP MODAL (VIDEOS + IMAGES) --- */
+        /* --- 5. POPUP MODAL --- */
         #video-modal {
             display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.95); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;
         }
         #video-modal.active { display: flex; opacity: 1; }
 
-        /* Unified Media Viewer */
         .modal-content.unified-view {
             width: 95%; max-width: 1400px; background: transparent; box-shadow: none;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -180,39 +194,25 @@
             transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease; 
         }
 
-        /* 1. TOP: Italic Caption */
         .media-caption {
             color: #d1d5db; font-size: 1.1rem; max-width: 800px; text-align: center;
             font-style: italic; font-weight: 300; margin-bottom: 15px; padding: 0 20px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* 2. MIDDLE: Media Container */
-        .media-box {
-            display: flex; justify-content: center; align-items: center; position: relative; width: 100%;
-        }
+        .media-box { display: flex; justify-content: center; align-items: center; position: relative; width: 100%; }
         .media-box.landscape { aspect-ratio: 16/9; max-width: 1000px; width: 100%; }
         .media-box.vertical { aspect-ratio: 9/16; max-height: 65vh; width: auto; }
         
-        .media-box iframe {
-            width: 100%; height: 100%; border: none; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-        }
+        .media-box iframe { width: 100%; height: 100%; border: none; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
         .media-box.image-box img { 
             max-width: 100%; max-height: 65vh; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); object-fit: contain;
         }
 
-        /* 3. BOTTOM: Title and Subtitle */
-        .media-details {
-            text-align: center; margin-top: 20px; padding: 0 20px;
-        }
-        .media-title {
-            color: #fff; font-size: 1.6rem; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .media-subtitle {
-            color: var(--accent); font-size: 1rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase;
-        }
+        .media-details { text-align: center; margin-top: 20px; padding: 0 20px; }
+        .media-title { color: #fff; font-size: 1.6rem; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .media-subtitle { color: var(--accent); font-size: 1rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* Minimal Navigation Arrows */
         .nav-btn {
             position: fixed; top: 50%; transform: translateY(-50%);
             width: 50px; height: 50px; background: rgba(255, 255, 255, 0.05); 
@@ -226,7 +226,6 @@
         .prev-btn { left: 30px; }
         .next-btn { right: 30px; }
 
-        /* PDF Viewer */
         .modal-content.pdf-view { 
             width: 90%; height: 90vh; background: #e0e0e0; border-radius: 8px; overflow-y: auto; 
             text-align: center; display: flex; flex-direction: column; align-items: center; padding-bottom: 40px;
@@ -246,7 +245,6 @@
         .close-btn:hover { color: var(--accent); transform: scale(1.1); }
         .modal-content.pdf-view .close-btn { color: #333; } 
 
-        /* --- 6. SCROLL TO TOP BUTTON --- */
         #scroll-top-btn {
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; 
             display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 9900; opacity: 0; visibility: hidden;
@@ -264,11 +262,10 @@
         }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        @media (max-width: 900px) { .masonry-column:nth-child(3) { display: none; } }
+        /* Responsive Breakpoints */
         @media (max-width: 650px) { 
             .video-grid { grid-template-columns: 1fr; }
-            .masonry-container { flex-direction: column; gap: 0; }
-            .masonry-column { gap: 0; display: block; } 
+            .masonry-col { display: block; }
             .glass-panel { padding: 25px; border-radius: 0; border: none; }
             h1 { font-size: 2.2rem; }
             .modal-content.pdf-view { width: 95%; height: 85vh; }
@@ -325,18 +322,20 @@
     <script>
         let globalData = {};
         
-        // Unified Gallery State Trackers
+        let allPhotoItems = [];
+        let currentPhotoFilter = 'all';
+
         let currentGallery = [];
         let currentGalleryIndex = 0;
 
-        // QUICK LOAD LOGIC
+        // --- QUICK LOAD LOGIC ---
         window.addEventListener('load', () => {
             fetch('data.json')
                 .then(response => response.json())
                 .then(data => {
                     globalData = data;
                     renderSite(data);
-                    setTimeout(() => { hideLoadingScreen(); }, 1500);
+                    setTimeout(() => { hideLoadingScreen(); }, 1500); 
                 })
                 .catch(err => {
                     console.error("Data load error:", err);
@@ -369,7 +368,13 @@
             }
         });
 
-        window.addEventListener('resize', () => { updateMasonryColumns(); });
+        // Responsive Masonry Reflow
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(() => {
+                if(allPhotoItems.length > 0) renderPhotos();
+            }, 100);
+        });
 
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
@@ -426,7 +431,10 @@
                         <h2>${cat.name}</h2> <span class="category-count">${String(mediaItems.length).padStart(2, '0')}</span>
                     </div>`;
 
+                // Handle Pictures Layout
                 if (cat.id === 'pictures') {
+                    allPhotoItems = mediaItems;
+                    
                     headerHtml += `
                         <p class="category-disclaimer">All pictures are captured and edited by me.</p>
                         <div class="filter-nav" id="photo-filters">
@@ -437,45 +445,18 @@
                             <button class="filter-btn" onclick="filterPhotos('portraits', this)">Portraits</button>
                         </div>
                     `;
-                }
-
-                let sectionHtml = headerHtml;
-
-                if (cat.id === 'pictures') {
-                    let col1 = '', col2 = '', col3 = '';
-                    mediaItems.forEach((item, index) => {
-                        const encodedCaption = item.caption ? encodeURIComponent(item.caption) : '';
-                        const tagAttr = item.tag ? `data-tag="${item.tag}"` : `data-tag="other"`;
-                        
-                        let cardHtml = `
-                            <div class="project-card" ${tagAttr} data-type="image" data-url="${item.imageUrl}" data-format="photo-card" data-title="${item.title}" data-subtitle="${item.subtitle}" data-caption="${encodedCaption}">
-                                <div class="video-wrapper photo-card">
-                                    <div class="hover-overlay" onclick="openMedia(this.closest('.project-card'))"></div>
-                                    <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" decoding="async">
-                                </div>
-                                <div class="click-hint">Click to View</div>
-                                <div class="info">
-                                    <h3>${item.title}</h3>
-                                    <p>${item.subtitle}</p>
-                                </div>
-                            </div>
-                        `;
-                        if (index % 3 === 0) col1 += cardHtml;
-                        else if (index % 3 === 1) col2 += cardHtml;
-                        else col3 += cardHtml;
-                    });
-                    sectionHtml += `
-                        <div class="masonry-container" id="photo-masonry">
-                            <div class="masonry-column">${col1}</div>
-                            <div class="masonry-column">${col2}</div>
-                            <div class="masonry-column">${col3}</div>
-                        </div>
-                    `;
-                } else {
+                    
+                    section.innerHTML = headerHtml + `<div id="photo-masonry" class="masonry-wrapper"></div>`;
+                    contentContainer.appendChild(section);
+                    
+                    renderPhotos(); // Builds the precise columns
+                } 
+                // Handle Videos Layout (Strict Grid)
+                else {
                     let gridHtml = `<div class="video-grid">`;
-                    mediaItems.forEach(item => {
+                    mediaItems.forEach((item, idx) => {
                         gridHtml += `
-                            <div class="project-card" data-type="video" data-url="${item.youtubeId}" data-format="${item.format}" data-title="${item.title}" data-subtitle="${item.subtitle}" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                            <div class="project-card" data-index="${idx}" data-type="video" data-url="${item.youtubeId}" data-format="${item.format}" data-title="${item.title}" data-subtitle="${item.subtitle}" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
                                 <div class="video-wrapper ${item.format}">
                                     <div class="hover-overlay" onclick="openMedia(this.closest('.project-card'))"></div>
                                     <iframe src="https://www.youtube.com/embed/${item.youtubeId}?enablejsapi=1&mute=1&controls=0&showinfo=0&rel=0" allow="autoplay; encrypted-media" loading="lazy" title="${item.title}"></iframe>
@@ -489,11 +470,59 @@
                         `;
                     });
                     gridHtml += `</div>`;
-                    sectionHtml += gridHtml;
+                    section.innerHTML = headerHtml + gridHtml;
+                    contentContainer.appendChild(section);
                 }
+            });
+        }
 
-                section.innerHTML = sectionHtml;
-                contentContainer.appendChild(section);
+        // --- BULLETPROOF PHOTO COLUMN ENGINE ---
+        function renderPhotos() {
+            const wrapper = document.getElementById('photo-masonry');
+            if(!wrapper) return;
+            
+            wrapper.innerHTML = ''; // Wipe clean
+
+            let filtered = allPhotoItems.filter(item => currentPhotoFilter === 'all' || item.tag === currentPhotoFilter);
+            
+            // Determine Columns based on screen width
+            let numCols = window.innerWidth > 1000 ? 3 : (window.innerWidth > 650 ? 2 : 1);
+            
+            // Build the exact columns needed
+            let cols = [];
+            for(let i = 0; i < numCols; i++) {
+                let col = document.createElement('div');
+                col.className = 'masonry-col';
+                
+                // Strictly lock the width of the column so it NEVER stretches!
+                if (numCols === 3) col.style.width = 'calc(33.333% - 16.66px)';
+                else if (numCols === 2) col.style.width = 'calc(50% - 12.5px)';
+                else col.style.width = '100%';
+                
+                cols.push(col);
+                wrapper.appendChild(col);
+            }
+
+            // Distribute photos into columns sequentially
+            filtered.forEach((item, index) => {
+                const encodedCaption = item.caption ? encodeURIComponent(item.caption) : '';
+                const tagAttr = item.tag ? `data-tag="${item.tag}"` : `data-tag="other"`;
+                
+                let cardHtml = `
+                    <div class="project-card photo-post" ${tagAttr} data-index="${index}" data-type="image" data-url="${item.imageUrl}" data-format="photo-card" data-title="${item.title}" data-subtitle="${item.subtitle}" data-caption="${encodedCaption}">
+                        <div class="video-wrapper photo-card">
+                            <div class="hover-overlay" onclick="openMedia(this.closest('.project-card'))"></div>
+                            <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" decoding="async">
+                        </div>
+                        <div class="click-hint">Click to View</div>
+                        <div class="info">
+                            <h3>${item.title}</h3>
+                            <p>${item.subtitle}</p>
+                        </div>
+                    </div>
+                `;
+                
+                cols[index % numCols].innerHTML += cardHtml;
             });
         }
 
@@ -501,37 +530,9 @@
             const buttons = document.querySelectorAll('#photo-filters .filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
-
-            const photos = document.querySelectorAll('#pictures .project-card');
-            photos.forEach(photo => {
-                if (category === 'all' || photo.getAttribute('data-tag') === category) {
-                    photo.style.display = 'block'; 
-                } else {
-                    photo.style.display = 'none';
-                }
-            });
-            updateMasonryColumns();
-        }
-
-        function updateMasonryColumns() {
-            const masonryGrid = document.querySelector('.masonry-container');
-            if (masonryGrid) {
-                let visibleCount = 0;
-                document.querySelectorAll('#pictures .project-card').forEach(photo => {
-                    if (photo.style.display !== 'none') visibleCount++;
-                });
-
-                const cols = document.querySelectorAll('.masonry-column');
-                if (window.innerWidth <= 650) {
-                    cols[0].style.display = 'flex'; cols[1].style.display = 'none'; cols[2].style.display = 'none';
-                } else if (window.innerWidth <= 900 || visibleCount === 2) {
-                    cols[0].style.display = 'flex'; cols[1].style.display = 'flex'; cols[2].style.display = 'none';
-                } else if (visibleCount === 1) {
-                    cols[0].style.display = 'flex'; cols[1].style.display = 'none'; cols[2].style.display = 'none';
-                } else {
-                    cols[0].style.display = 'flex'; cols[1].style.display = 'flex'; cols[2].style.display = 'flex';
-                }
-            }
+            
+            currentPhotoFilter = category;
+            renderPhotos(); 
         }
 
         function hoverPlay(card) {
@@ -565,13 +566,15 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // --- UNIFIED SLIDER (VIDEOS & IMAGES) ---
+        // --- UNIFIED SLIDER ---
         function openMedia(cardElement) {
             currentGallery = [];
             
-            // Gather all visible media cards in the same category
             const section = cardElement.closest('section');
-            const cards = section.querySelectorAll('.project-card');
+            let cards = Array.from(section.querySelectorAll('.project-card'));
+            
+            // Re-sort cards logically by their HTML index so navigation makes sense
+            cards.sort((a, b) => parseInt(a.getAttribute('data-index') || 0) - parseInt(b.getAttribute('data-index') || 0));
             
             cards.forEach(card => {
                 if (window.getComputedStyle(card).display !== 'none') {
@@ -629,7 +632,6 @@
             const prevBtn = document.getElementById('gallery-prev');
             const nextBtn = document.getElementById('gallery-next');
 
-            // Hide arrows if at the start/end
             prevBtn.style.display = currentGalleryIndex === 0 ? 'none' : 'flex';
             nextBtn.style.display = currentGalleryIndex === currentGallery.length - 1 ? 'none' : 'flex';
 
