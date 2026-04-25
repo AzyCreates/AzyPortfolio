@@ -52,6 +52,18 @@
                     "subtitle": "Nature • Scenery",
                     "youtubeId": "7nSmvJHJVv4",
                     "format": "landscape"
+                },
+                {
+                    "title": "Sign-off",
+                    "subtitle": "Travel • Experience",
+                    "youtubeId": "64DKWBF_cb4",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Interview",
+                    "subtitle": "Podcast",
+                    "youtubeId": "91Iz7WHQ-BA",
+                    "format": "landscape"
                 }
             ]
         },
@@ -75,6 +87,24 @@
                     "title": "Dalubhasa",
                     "subtitle": "Cinematic • Storytelling",
                     "youtubeId": "4SBTh32Iyj4",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Trailer",
+                    "subtitle": "Storytelling • Power",
+                    "youtubeId": "7RI0u3DEIfI",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Text Teaser",
+                    "subtitle": "Text",
+                    "youtubeId": "R3da8e00OWk",
+                    "format": "landscape"
+                },
+                {
+                    "title": "Graduation Teaser",
+                    "subtitle": "Text",
+                    "youtubeId": "CigBbm_lIeQ",
                     "format": "landscape"
                 }
             ]
