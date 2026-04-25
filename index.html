@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Azy | Editor Portfolio</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
     
     <link rel="icon" type="image/png" href="Pictures/Azy Logo.png" id="favicon-link">
     
@@ -40,32 +42,20 @@
             overflow-y: hidden; /* Locked during boot */
         }
 
-        /* --- 2. INTRO --- */
+        /* --- 2. TRUE LOADING SCREEN --- */
         #intro-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            transition: opacity 0.8s ease-in-out;
         }
 
-        .intro-logo-img {
-            width: 180px; height: 180px; object-fit: contain;
-            background: #000; border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.2);
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
-            opacity: 0; transform: scale(0.5);
-            animation: popLogo 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .loading-line {
-            width: 0%; height: 3px; background: var(--accent);
-            margin-top: 40px; border-radius: 2px;
-            box-shadow: 0 0 15px var(--accent); transition: width 0.5s ease;
-        }
-
-        @keyframes popLogo {
-            0% { opacity: 0; transform: scale(0.5) translateY(30px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+        .intro-loading-logo {
+            width: 140px; 
+            height: auto; 
+            object-fit: contain;
+            margin-bottom: -30px; /* Pulls the lottie closer to the logo */
+            z-index: 10;
         }
 
         /* --- 3. STICKY NAV --- */
@@ -129,32 +119,23 @@
         }
         .category-count { font-size: 0.8rem; background: #333; padding: 2px 8px; border-radius: 4px; color: #aaa; }
         
-        /* Specific subtitle for pictures */
         .category-disclaimer {
-            text-align: center;
-            color: var(--text-muted);
-            margin-top: -10px;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            font-style: italic;
+            text-align: center; color: var(--text-muted); margin-top: -10px; margin-bottom: 25px;
+            font-size: 0.95rem; font-style: italic;
         }
 
         /* FILTER BUTTONS FOR PHOTOS */
-        .filter-nav {
-            display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;
-        }
+        .filter-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
         .filter-btn {
             background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--glass-border);
             padding: 8px 20px; border-radius: 50px; cursor: pointer; transition: 0.3s ease; font-size: 0.9rem;
             font-family: 'Poppins', sans-serif;
         }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent); border-color: var(--accent);
-        }
+        .filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); }
 
-        /* --- THE GRID LAYOUTS --- */
+        /* --- BULLETPROOF FLEX MASONRY FIX --- */
         
-        /* 1. Video Grid (Strict rows for 16:9/9:16 videos) */
+        /* Video Grid (Strict rows for Videos) */
         .video-grid { 
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -162,46 +143,40 @@
             align-items: start; 
         }
 
-        /* 2. Photo Grid (Pinterest-style Masonry to remove empty gaps) */
-        .masonry-grid {
-            column-count: 3; /* JS adjusts this down to 2 or 1 if there aren't enough photos */
-            column-gap: 25px;
+        /* Perfect Photo Masonry (Using Flexbox Columns) */
+        .masonry-container {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
             width: 100%;
+        }
+        .masonry-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
         /* General Card */
         .project-card {
             background: rgba(0,0,0,0.4); border-radius: 16px; overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative;
-            width: 100%; margin-bottom: 25px;
+            width: 100%;
         }
         .project-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        /* Specific rule for Masonry items to prevent splitting in half */
-        .masonry-grid .project-card {
-            display: inline-block;
-            break-inside: avoid;
-            -webkit-column-break-inside: avoid;
-            page-break-inside: avoid;
-        }
 
         .video-wrapper { width: 100%; position: relative; background: #000; overflow: hidden; }
         
         .video-wrapper.landscape { aspect-ratio: 16/9; }
         .video-wrapper.vertical { aspect-ratio: 9/16; }
-        .video-wrapper.photo-card { aspect-ratio: auto; }
 
         .video-wrapper iframe {
             width: 100%; height: 100%; border: none; pointer-events: none; transition: opacity 0.3s;
             position: absolute; top: 0; left: 0;
         }
-        
         .video-wrapper img { width: 100%; height: auto; display: block; }
         
-        .hover-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; cursor: pointer; background: transparent;
-        }
+        .hover-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; background: transparent; }
         
         .click-hint {
             position: absolute; bottom: 10px; right: 10px;
@@ -226,11 +201,7 @@
         }
         #video-modal.active { display: flex; opacity: 1; }
 
-        .modal-content {
-            position: relative; width: 80%; max-width: 1000px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        }
-        
+        .modal-content { position: relative; width: 80%; max-width: 1000px; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
         .modal-content.landscape { aspect-ratio: 16/9; width: 80%; }
         .modal-content.vertical { aspect-ratio: 9/16; height: 85vh; width: auto; }
         
@@ -240,7 +211,6 @@
         }
         .resume-img { max-width: 100%; height: auto; display: block; margin: 20px auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
         
-        /* PHOTO VIEWER MODAL STYLE */
         .modal-content.image-view {
             width: auto; max-width: 90%; height: auto; max-height: 95vh; background: transparent; box-shadow: none;
             display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px;
@@ -251,8 +221,7 @@
             color: #f8f9fa; font-size: 1.05rem; max-width: 700px; text-align: center; line-height: 1.5;
             background: rgba(30, 30, 40, 0.85); padding: 15px 25px; border-radius: 12px;
             border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            font-weight: 300;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4); font-weight: 300;
         }
 
         .download-btn {
@@ -263,13 +232,11 @@
             font-family: 'Poppins', sans-serif;
         }
         .download-btn:hover { background-color: #2563eb; transform: translateY(-2px); }
-
         .modal-content iframe { width: 100%; height: 100%; border: none; }
 
         .close-btn {
             position: absolute; top: 20px; right: 30px; color: #fff;
-            font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10002; transition: 0.2s;
-            line-height: 1;
+            font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10002; transition: 0.2s; line-height: 1;
         }
         .close-btn:hover { color: var(--accent); transform: scale(1.1); }
         .modal-content.pdf-view .close-btn { color: #333; } 
@@ -293,12 +260,14 @@
         }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        @media (max-width: 1000px) { 
-            .masonry-grid { column-count: 2; } 
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) { 
+            .masonry-column:nth-child(3) { display: none; } /* Drop to 2 columns */
         }
         @media (max-width: 650px) { 
             .video-grid { grid-template-columns: 1fr; }
-            /* Mobile handles columns automatically now via JS */
+            .masonry-container { flex-direction: column; gap: 0; }
+            .masonry-column { gap: 0; display: block; } /* Drop to 1 column */
             .glass-panel { padding: 25px; border-radius: 0; border: none; }
             h1 { font-size: 2.2rem; }
             .modal-content { width: 95%; }
@@ -315,8 +284,8 @@
     <nav id="sticky-nav"></nav>
 
     <div id="intro-layer">
-        <img src="" alt="Logo" class="intro-logo-img" id="intro-logo">
-        <div class="loading-line" id="loader"></div>
+        <img src="Pictures/loadinglogo.png" alt="Loading" class="intro-loading-logo" onerror="this.src='Pictures/Azy Logo.png'">
+        <dotlottie-wc src="https://lottie.host/9209af93-c3da-4b0d-9f8f-25861d6141df/otyHASqhzY.lottie" style="width: 300px;height: 300px" autoplay loop></dotlottie-wc>
     </div>
 
     <main id="main-content">
@@ -351,37 +320,35 @@
     <script>
         let globalData = {};
 
+        // CORE LOADING LOGIC - GUARANTEED FAST LOAD
         window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            
             fetch('data.json')
-                .then(response => {
-                    if (!response.ok) throw new Error("Could not load data.json");
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     globalData = data;
                     renderSite(data);
                     
-                    setTimeout(() => { loader.style.width = "300px"; }, 100);
+                    // FORCE HIDE after exactly 1.8 seconds so it NEVER gets stuck
                     setTimeout(() => {
-                        document.getElementById('intro-layer').style.opacity = '0';
-                        document.getElementById('intro-layer').style.pointerEvents = 'none';
-                        const main = document.getElementById('main-content');
-                        main.style.visibility = 'visible';
-                        main.style.opacity = '1';
-                        main.style.transform = 'scale(1)';
-                        document.body.style.overflowY = 'auto';
-                        
-                        // Force columns calculation once layout is visible
-                        updateMasonryColumns();
-                    }, 1600);
+                        hideLoadingScreen();
+                    }, 1800);
                 })
                 .catch(err => {
                     alert("Error: To use the JSON file, you must run this on a local server.");
-                    console.error(err);
+                    hideLoadingScreen();
                 });
         });
+
+        function hideLoadingScreen() {
+            const intro = document.getElementById('intro-layer');
+            intro.style.opacity = '0';
+            intro.style.pointerEvents = 'none';
+            const main = document.getElementById('main-content');
+            main.style.visibility = 'visible';
+            main.style.opacity = '1';
+            main.style.transform = 'scale(1)';
+            document.body.style.overflowY = 'auto';
+        }
 
         window.addEventListener('scroll', () => {
             const stickyNav = document.getElementById('sticky-nav');
@@ -397,11 +364,6 @@
             }
         });
 
-        // Trigger column update on resize
-        window.addEventListener('resize', () => {
-            updateMasonryColumns();
-        });
-
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -409,7 +371,7 @@
         function renderSite(data) {
             document.title = data.meta.pageTitle;
             document.getElementById('favicon-link').href = data.meta.favicon;
-            document.getElementById('intro-logo').src = data.meta.logoImage;
+            
             document.getElementById('header-title').innerText = data.header.title;
             document.getElementById('header-tagline').innerText = data.header.tagline;
             document.getElementById('footer-text').innerText = data.footer.text;
@@ -462,7 +424,7 @@
 
                 if (cat.id === 'pictures') {
                     headerHtml += `
-                        <p class="category-disclaimer">All photos captured and edited by me.</p>
+                        <p class="category-disclaimer">All pictures are captured and edited by me.</p>
                         <div class="filter-nav" id="photo-filters">
                             <button class="filter-btn active" onclick="filterPhotos('all', this)">All</button>
                             <button class="filter-btn" onclick="filterPhotos('events', this)">Events</button>
@@ -473,12 +435,49 @@
                     `;
                 }
 
-                // Videos get normal grid, Pictures get masonry grid
-                let gridClass = cat.id === 'pictures' ? 'masonry-grid' : 'video-grid';
-                let gridHtml = `<div class="${gridClass}">`;
-                
-                mediaItems.forEach(item => {
-                    if (item.youtubeId) {
+                let sectionHtml = headerHtml;
+
+                // --- PERFECT FLEXBOX MASONRY FOR PHOTOS ---
+                if (cat.id === 'pictures') {
+                    // Create 3 Flex Columns
+                    let col1 = '', col2 = '', col3 = '';
+                    
+                    mediaItems.forEach((item, index) => {
+                        const encodedCaption = item.caption ? encodeURIComponent(item.caption) : '';
+                        const tagAttr = item.tag ? `data-tag="${item.tag}"` : `data-tag="other"`;
+                        
+                        let cardHtml = `
+                            <div class="project-card photo-post" ${tagAttr}>
+                                <div class="video-wrapper photo-card">
+                                    <div class="hover-overlay" onclick="openPhoto('${item.imageUrl}', '${encodedCaption}')"></div>
+                                    <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" decoding="async">
+                                </div>
+                                <div class="click-hint">Click to View</div>
+                                <div class="info">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.subtitle}</p>
+                                </div>
+                            </div>
+                        `;
+
+                        // Distribute cards equally into the 3 columns
+                        if (index % 3 === 0) col1 += cardHtml;
+                        else if (index % 3 === 1) col2 += cardHtml;
+                        else col3 += cardHtml;
+                    });
+
+                    sectionHtml += `
+                        <div class="masonry-container" id="photo-masonry">
+                            <div class="masonry-column">${col1}</div>
+                            <div class="masonry-column">${col2}</div>
+                            <div class="masonry-column">${col3}</div>
+                        </div>
+                    `;
+                } 
+                // --- STANDARD GRID FOR VIDEOS ---
+                else {
+                    let gridHtml = `<div class="video-grid">`;
+                    mediaItems.forEach(item => {
                         gridHtml += `
                             <div class="project-card" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
                                 <div class="video-wrapper ${item.format}">
@@ -492,53 +491,14 @@
                                 </div>
                             </div>
                         `;
-                    } else if (item.imageUrl) {
-                        const encodedCaption = item.caption ? encodeURIComponent(item.caption) : '';
-                        const tagAttr = item.tag ? `data-tag="${item.tag}"` : `data-tag="other"`;
-                        
-                        gridHtml += `
-                            <div class="project-card photo-post" ${tagAttr}>
-                                <div class="video-wrapper photo-card">
-                                    <div class="hover-overlay" onclick="openPhoto('${item.imageUrl}', '${encodedCaption}')"></div>
-                                    <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" decoding="async">
-                                </div>
-                                <div class="click-hint">Click to View</div>
-                                <div class="info">
-                                    <h3>${item.title}</h3>
-                                    <p>${item.subtitle}</p>
-                                </div>
-                            </div>
-                        `;
-                    }
-                });
-                gridHtml += '</div>';
+                    });
+                    gridHtml += `</div>`;
+                    sectionHtml += gridHtml;
+                }
 
-                section.innerHTML = headerHtml + gridHtml;
+                section.innerHTML = sectionHtml;
                 contentContainer.appendChild(section);
             });
-        }
-
-        // --- SMART COLUMN ALGORITHM ---
-        // Dynamically adjusts column-count so 1 or 2 photos stay side-by-side!
-        function updateMasonryColumns() {
-            const masonryGrid = document.querySelector('.masonry-grid');
-            if (masonryGrid) {
-                // Count how many photos are currently visible
-                let visibleCount = 0;
-                document.querySelectorAll('.project-card.photo-post').forEach(photo => {
-                    if (photo.style.display !== 'none') {
-                        visibleCount++;
-                    }
-                });
-
-                // Determine maximum columns allowed based on screen width
-                let maxCols = window.innerWidth > 1000 ? 3 : (window.innerWidth > 650 ? 2 : 1);
-                
-                // If we have fewer photos than columns, shrink the column count to match the photos!
-                let appliedCols = (visibleCount > 0 && visibleCount < maxCols) ? visibleCount : maxCols;
-                
-                masonryGrid.style.columnCount = appliedCols;
-            }
         }
 
         function filterPhotos(category, btnElement) {
@@ -547,17 +507,13 @@
             btnElement.classList.add('active');
 
             const photos = document.querySelectorAll('.project-card.photo-post');
-            
             photos.forEach(photo => {
                 if (category === 'all' || photo.getAttribute('data-tag') === category) {
-                    photo.style.display = 'inline-block'; 
+                    photo.style.display = 'block'; 
                 } else {
                     photo.style.display = 'none';
                 }
             });
-
-            // Re-calculate the columns immediately after filtering
-            updateMasonryColumns();
         }
 
         function hoverPlay(card) {
