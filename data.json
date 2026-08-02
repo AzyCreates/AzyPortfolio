@@ -381,6 +381,118 @@
                     "imageUrl": "Pictures/images/Foods/SET.png",
                     "format": "photo-card",
                     "tag": "foods"
+                },
+                {
+                    "title": "Science Fair",
+                    "subtitle": "Event Poster Design",
+                    "imageUrl": "Pictures/images/Layouts/7.png",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "Slogan",
+                    "subtitle": "Title card",
+                    "imageUrl": "Pictures/images/Layouts/10.png",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "Dalubhasa",
+                    "subtitle": "Film Poster",
+                    "imageUrl": "Pictures/images/Layouts/DALUBHASA.png",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "Message",
+                    "subtitle": "Event Graphic",
+                    "imageUrl": "Pictures/images/Layouts/Empty until full.png",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "Palarong Pambansa",
+                    "subtitle": "Player Graphic",
+                    "imageUrl": "Pictures/images/Layouts/khards.jpg",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "Pahinga",
+                    "subtitle": "Thumbnail Design",
+                    "imageUrl": "Pictures/images/Layouts/PahingaThumb.png",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "Shift",
+                    "subtitle": "Film Poster",
+                    "imageUrl": "Pictures/images/Layouts/shift.jpg",
+                    "format": "photo-card",
+                    "tag": "layouts"
+                },
+                {
+                    "title": "The Finish Line",
+                    "subtitle": "Cycling Event",
+                    "imageUrl": "Pictures/images/Sports/Finish.jpg",
+                    "format": "photo-card",
+                    "tag": "sports"
+                },
+                {
+                    "title": "Podium Celebration",
+                    "subtitle": "Cycling Event",
+                    "imageUrl": "Pictures/images/Sports/Podium.JPG",
+                    "format": "photo-card",
+                    "tag": "sports"
+                },
+                {
+                    "title": "Resting Power",
+                    "subtitle": "Cycling Event",
+                    "imageUrl": "Pictures/images/Sports/Power.JPG",
+                    "format": "photo-card",
+                    "tag": "sports"
+                },
+                {
+                    "title": "Tour of Luzon",
+                    "subtitle": "Cycling Event",
+                    "imageUrl": "Pictures/images/Sports/TOL.JPG",
+                    "format": "photo-card",
+                    "tag": "sports"
+                },
+                {
+                    "title": "The Winner",
+                    "subtitle": "Cycling Event",
+                    "imageUrl": "Pictures/images/Sports/Winner.jpg",
+                    "format": "photo-card",
+                    "tag": "sports"
+                },
+                {
+                    "title": "Sunset Dine",
+                    "subtitle": "Cafe View",
+                    "imageUrl": "Pictures/images/Foods/OTW1_1.png",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Assorted Frappes",
+                    "subtitle": "Cafe Drinks",
+                    "imageUrl": "Pictures/images/Foods/Drink.JPG",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Iced Coffee",
+                    "subtitle": "Cafe Drinks",
+                    "imageUrl": "Pictures/images/Foods/Coffee.JPG",
+                    "format": "photo-card",
+                    "tag": "foods"
+                },
+                {
+                    "title": "Pasta & Beverage",
+                    "subtitle": "Cafe Meals",
+                    "imageUrl": "Pictures/images/Foods/Spaghetti.JPG",
+                    "format": "photo-card",
+                    "tag": "foods"
                 }
             ]
         }
