@@ -196,10 +196,18 @@
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         @media (max-width: 1000px) { .video-grid .project-card { width: calc(50% - 12.5px); } }
+        
+        /* Mobile restrictions applied here to prevent navbar expansion */
+        @media (max-width: 900px) {
+            .bottom-dynamic-nav { display: none !important; }
+        }
+
         @media (max-width: 650px) { 
             .video-grid .project-card { width: 100%; } .masonry-col { display: block; }
             h1 { font-size: 2.5rem; } .media-box.landscape { max-width: 100%; } .media-box.image-box img { max-height: 50vh; }
             .prev-btn { left: 10px; width: 40px; height: 40px; } .next-btn { right: 10px; width: 40px; height: 40px; }
+            .bottom-nav { width: 90%; justify-content: center; }
+            .bubble-btn { padding: 12px 20px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -208,10 +216,10 @@
     <!-- LOADING SCREEN -->
     <div id="intro-layer">
         <img src="Pictures/loadinglogo.png" alt="Loading" class="intro-loading-logo" onerror="this.src='Pictures/Azy Logo.png'">
-        <dotlottie-wc src="https://lottie.host/9209af93-c3da-4b0d-9f8f-25861d6141df/otyHASqhzY.lottie" style="width: 300px;height: 300px" autoplay loop></dotlottie-wc>
+        <dotlottie-wc src="https://lottie.host/9209af93-c3da-4b0d-9f8f-25861d6141df/otyHASqhzY.lottie" style="width: 300px;height: 300px; max-width: 80%;" autoplay loop></dotlottie-wc>
     </div>
 
-    <!-- BOTTOM FLUID NAVBAR (Identical to Home + Expandable Categories) -->
+    <!-- BOTTOM FLUID NAVBAR (Identical to Home + Expandable Categories on Desktop) -->
     <nav class="bottom-nav">
         <a href="index.html" class="bubble-btn">Home</a>
         <a href="catalog.html" class="bubble-btn active">Work</a>
@@ -313,16 +321,19 @@
                 </a>`;
             }
             
+            // Hardcoded LinkedIn as requested
             popup.innerHTML += `<a href="https://www.linkedin.com/in/dhasydony-villanueva-916739326" target="_blank" class="popup-item">
                 <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
             </a>`;
         }
 
+        // Profile Menu Toggle Logic
         function toggleProfileMenu(e) {
             e.stopPropagation();
             document.getElementById('profile-popup').classList.toggle('active');
         }
 
+        // Close popup when clicking outside
         document.addEventListener('click', (e) => {
             const popup = document.getElementById('profile-popup');
             const logo = document.querySelector('.profile-logo');
@@ -632,6 +643,91 @@
             toast.classList.add('show');
             setTimeout(() => { toast.classList.remove('show'); }, 3000);
         }
+
+        // Waterbubble Hover Effect Logic
+        document.querySelectorAll('.bubble-btn').forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                this.style.setProperty('--x', x + 'px');
+                this.style.setProperty('--y', y + 'px');
+            });
+        });
+
+        // Smooth Scroll Reveal (Intersection Observer)
+        const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Advanced 3D Mouse Parallax Effect
+        document.addEventListener("mousemove", parallax);
+        function parallax(e) {
+            if (window.innerWidth < 900) return; 
+
+            let _w = window.innerWidth / 2;
+            let _h = window.innerHeight / 2;
+            let mouseX = e.clientX;
+            let mouseY = e.clientY;
+
+            let img = document.getElementById('parallax-img');
+            if(img) {
+                let imgX = (mouseX - _w) * 0.015; 
+                let imgY = (mouseY - _h) * 0.015;
+                img.style.transform = `translateX(${-imgX}px) translateY(${-imgY}px)`;
+            }
+
+            document.querySelectorAll('.parallax-layer').forEach(layer => {
+                let speed = layer.getAttribute('data-speed');
+                let x = (mouseX - _w) * speed * 0.005;
+                let y = (mouseY - _h) * speed * 0.005;
+                layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        }
+
+        // Smooth Scroll Parallax (Depth Effect)
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth < 900) return; 
+            
+            let scrollPosition = window.scrollY;
+            let img = document.getElementById('parallax-img');
+            
+            if(img) {
+                img.style.bottom = `${-scrollPosition * 0.25}px`;
+            }
+        });
+
+        window.dispatchEvent(new Event('scroll'));
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        document.onkeydown = function(e) {
+            // Disable F12
+            if (e.keyCode == 123) {
+                return false;
+            }
+            // Disable Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            // Disable Ctrl+Shift+J
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        };
     </script>
 </body>
 </html>

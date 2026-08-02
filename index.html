@@ -210,9 +210,10 @@
 
         /* --- RESPONSIVE MOBILE FIXES --- */
         @media (max-width: 900px) {
-            .hero { flex-direction: column; justify-content: center; padding-top: 100px; text-align: center; }
-            .hero-portrait { right: 50%; transform: translateX(50%); height: 55vh; opacity: 0.4; z-index: 1; bottom: 50px; }
-            .hero-content { z-index: 10; text-shadow: 0 5px 20px rgba(0,0,0,1); }
+            .hero { flex-direction: column; justify-content: flex-start; padding-top: 100px; text-align: center; height: auto; min-height: 100vh; }
+            .hero-portrait { position: relative; right: auto; bottom: auto; transform: none; height: 45vh; opacity: 1; order: 1; margin: 0 auto 20px auto; z-index: 5; }
+            .hero-content { order: 2; z-index: 10; text-shadow: 0 5px 20px rgba(0,0,0,0.8); padding-bottom: 60px; }
+            .hero-content h1 { font-size: 3.5rem; }
             
             .timeline::after { left: 20px; }
             .timeline-item { width: 100%; padding-left: 60px; padding-right: 0; text-align: left; margin-bottom: 40px; }
@@ -225,6 +226,7 @@
 
         /* Extra Strict Mobile View (Phones) */
         @media (max-width: 600px) {
+            .hero-portrait { height: 35vh; }
             .hero-content h1 { font-size: 3rem; }
             .hero-content p { font-size: 1rem; }
             .section-title { font-size: 2.2rem; margin-bottom: 50px; }
@@ -241,7 +243,7 @@
             
             .bottom-nav { width: 95%; justify-content: center; padding: 8px; }
             .bubble-btn { padding: 10px 18px; font-size: 0.85rem; }
-            .profile-popup { right: -10px; bottom: 60px; } /* Prevent horizontal overflow */
+            .profile-popup { right: -10px; bottom: 60px; } 
             .intro-loading-logo { width: 100px; }
         }
     </style>
@@ -500,6 +502,27 @@
         });
 
         window.dispatchEvent(new Event('scroll'));
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        document.onkeydown = function(e) {
+            // Disable F12
+            if (e.keyCode == 123) {
+                return false;
+            }
+            // Disable Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            // Disable Ctrl+Shift+J
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        };
     </script>
 </body>
 </html>
